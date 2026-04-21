@@ -44,7 +44,8 @@ const Charities = () => {
             <p className="text-xs uppercase tracking-[0.25em] text-primary mb-4">Charity directory</p>
             <h1 className="font-display font-bold text-4xl md:text-5xl mb-4">Pick a cause that moves you.</h1>
             <p className="text-muted-foreground text-lg">
-              Every subscriber chooses one charity. Your contribution flows directly to them every month.
+              Every subscriber chooses one charity. Your contribution flows directly to them every month. 
+              <span className="block mt-2 font-bold text-primary italic text-sm">Not a golfer? You can still make a one-off donation.</span>
             </p>
           </motion.div>
 
@@ -104,13 +105,25 @@ const Charities = () => {
                 <div className="p-6 flex-1 flex flex-col">
                   <h3 className="font-display font-bold text-lg mb-2">{c.name}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed flex-1 mb-4">{c.desc}</p>
-                  <div className="flex items-end justify-between pt-4 border-t border-primary/10">
-                    <div>
-                      <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Raised</p>
-                      <p className="text-xl text-gradient-gold"><CountUp end={c.raised} prefix="£" /></p>
+                  <div className="flex flex-col gap-2 w-full pt-4 border-t border-primary/10 mt-auto">
+                    <div className="flex items-center justify-between mb-2">
+                      <div>
+                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Raised</p>
+                        <p className="text-xl text-gradient-gold"><CountUp end={c.raised} prefix="£" /></p>
+                      </div>
+                      <div className="flex gap-1.5">
+                         <Link to={`/charities/${c.id}`}>
+                            <Button variant="ghost" size="sm" className="h-9 px-3">View</Button>
+                         </Link>
+                         <Link to={`/charities/${c.id}`}>
+                            <Button variant="gold-outline" size="sm" className="h-9 px-3">Donate</Button>
+                         </Link>
+                      </div>
                     </div>
-                    <Link to={`/charities/${c.id}`}>
-                      <Button variant="gold-outline" size="sm">View</Button>
+                    <Link to="/register" className="w-full">
+                      <Button variant={c.featured ? "hero" : "outline"} size="sm" className="w-full h-10">
+                        Select for Subscription
+                      </Button>
                     </Link>
                   </div>
                 </div>

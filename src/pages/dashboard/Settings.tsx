@@ -90,14 +90,36 @@ const Settings = () => {
         </button>
       </SectionCard>
 
-      <SectionCard title="Notifications" desc="Choose what you'd like to hear about." delay={0.15}>
+      <SectionCard title="Regional Preferences" desc="Select your primary region for localized currency and draw eligibility." delay={0.18}>
+        <div className="grid md:grid-cols-2 gap-4 text-left">
+           <div className="space-y-2">
+              <Label>Primary Region</Label>
+              <select className="w-full h-11 bg-input/40 border border-primary/15 rounded-md px-3 text-sm focus:border-primary/50 outline-none">
+                 <option value="UK">United Kingdom (GBP £)</option>
+                 <option value="US">United States (USD $)</option>
+                 <option value="EU">European Union (EUR €)</option>
+                 <option value="AU">Australia (AUD $)</option>
+              </select>
+           </div>
+           <div className="space-y-2">
+              <Label>Date Format</Label>
+              <select className="w-full h-11 bg-input/40 border border-primary/15 rounded-md px-3 text-sm focus:border-primary/50 outline-none">
+                 <option value="GB">DD/MM/YYYY</option>
+                 <option value="US">MM/DD/YYYY</option>
+                 <option value="ISO">YYYY-MM-DD</option>
+              </select>
+           </div>
+        </div>
+      </SectionCard>
+
+      <SectionCard title="Notifications" desc="Choose what you'd like to hear about." delay={0.22}>
         <div className="space-y-4">
           {[
             { label: "Email notifications", desc: "Account updates and renewal reminders.", val: emailNotif, set: setEmailNotif },
             { label: "Draw results", desc: "Notify me when monthly draw results are published.", val: drawNotif, set: setDrawNotif },
             { label: "Marketing", desc: "Product news and partner offers.", val: marketing, set: setMarketing },
           ].map((row) => (
-            <div key={row.label} className="flex items-center justify-between gap-4 py-3 border-b border-primary/10 last:border-0">
+            <div key={row.label} className="flex items-center justify-between gap-4 py-3 border-b border-primary/10 last:border-0 text-left">
               <div>
                 <p className="text-sm font-medium">{row.label}</p>
                 <p className="text-xs text-muted-foreground">{row.desc}</p>

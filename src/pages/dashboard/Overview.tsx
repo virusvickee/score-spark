@@ -25,6 +25,7 @@ const StatCard = ({ icon: Icon, label, value, accent, delay = 0 }: any) => (
 const Overview = () => {
   const totalWinnings = WINNINGS.reduce((s, w) => s + w.amount, 0);
   const scoreCount = INITIAL_SCORES.length;
+  const hasPlan = MOCK_USER.plan !== "None";
 
   return (
     <div className="space-y-8 max-w-6xl">
@@ -35,17 +36,23 @@ const Overview = () => {
       >
         <p className="text-xs uppercase tracking-[0.25em] text-primary mb-2">Dashboard</p>
         <h1 className="font-display font-bold text-3xl md:text-4xl">
-          Hey {MOCK_USER.name.split(" ")[0]}, good luck this month! <span className="inline-block">🏆</span>
+          Hey {MOCK_USER.name.split(" ")[0]}, {hasPlan ? "good luck this month!" : "welcome back!"} <span className="inline-block">{hasPlan ? "🏆" : "👋"}</span>
         </h1>
-        <p className="text-muted-foreground mt-2">Here's your participation snapshot.</p>
+        <p className="text-muted-foreground mt-2">{hasPlan ? "Here's your participation snapshot." : "Subscribe to start tracking scores and win prizes."}</p>
       </motion.div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
-          icon={CheckCircle2}
+          icon={hasPlan ? CheckCircle2 : Clock}
           label="Subscription"
-          value={<span className="text-success flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-success animate-pulse" /> Active</span>}
-          accent="bg-success/15 text-success"
+          value={hasPlan ? (
+            <span className="text-success flex items-center gap-2">
+               <span className="w-2 h-2 rounded-full bg-success animate-pulse" /> Active
+            </span>
+          ) : (
+            <span className="text-destructive">Lapsed</span>
+          )}
+          accent={hasPlan ? "bg-success/15 text-success" : "bg-destructive/15 text-destructive"}
           delay={0.05}
         />
         <StatCard

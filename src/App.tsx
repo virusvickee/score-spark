@@ -20,6 +20,14 @@ import Draws from "./pages/dashboard/Draws.tsx";
 import Winnings from "./pages/dashboard/Winnings.tsx";
 import DashboardSettings from "./pages/dashboard/Settings.tsx";
 
+import { AdminLayout } from "./components/admin/AdminLayout.tsx";
+import AdminOverview from "./pages/admin/Overview.tsx";
+import AdminUsers from "./pages/admin/Users.tsx";
+import AdminDraws from "./pages/admin/Draws.tsx";
+import AdminCharities from "./pages/admin/Charities.tsx";
+import AdminWinners from "./pages/admin/Winners.tsx";
+import AdminAnalytics from "./pages/admin/Analytics.tsx";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -44,15 +52,14 @@ const App = () => (
             <Route path="winnings" element={<Winnings />} />
             <Route path="settings" element={<DashboardSettings />} />
           </Route>
-          <Route
-            path="/admin/*"
-            element={
-              <ComingSoon
-                title="Admin panel is on the way."
-                description="User management, draw simulation engine, charity admin, winner verification, and reports. Coming next."
-              />
-            }
-          />
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminOverview />} />
+            <Route path="users" element={<AdminUsers />} />
+            <Route path="draws" element={<AdminDraws />} />
+            <Route path="charities" element={<AdminCharities />} />
+            <Route path="winners" element={<AdminWinners />} />
+            <Route path="analytics" element={<AdminAnalytics />} />
+          </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
