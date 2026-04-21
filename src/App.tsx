@@ -12,6 +12,13 @@ import Subscribe from "./pages/Subscribe.tsx";
 import Charities from "./pages/Charities.tsx";
 import CharityProfile from "./pages/CharityProfile.tsx";
 import ComingSoon from "./pages/ComingSoon.tsx";
+import { DashboardLayout } from "./components/dashboard/DashboardLayout.tsx";
+import Overview from "./pages/dashboard/Overview.tsx";
+import Scores from "./pages/dashboard/Scores.tsx";
+import Charity from "./pages/dashboard/Charity.tsx";
+import Draws from "./pages/dashboard/Draws.tsx";
+import Winnings from "./pages/dashboard/Winnings.tsx";
+import DashboardSettings from "./pages/dashboard/Settings.tsx";
 
 const queryClient = new QueryClient();
 
@@ -29,15 +36,14 @@ const App = () => (
           <Route path="/subscribe" element={<Subscribe />} />
           <Route path="/charities" element={<Charities />} />
           <Route path="/charities/:id" element={<CharityProfile />} />
-          <Route
-            path="/dashboard/*"
-            element={
-              <ComingSoon
-                title="Your dashboard is next."
-                description="Score tracking, charity contribution slider, draw results, and winnings — all coming in the next iteration. Connect Lovable Cloud to enable accounts."
-              />
-            }
-          />
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route index element={<Overview />} />
+            <Route path="scores" element={<Scores />} />
+            <Route path="charity" element={<Charity />} />
+            <Route path="draws" element={<Draws />} />
+            <Route path="winnings" element={<Winnings />} />
+            <Route path="settings" element={<DashboardSettings />} />
+          </Route>
           <Route
             path="/admin/*"
             element={
